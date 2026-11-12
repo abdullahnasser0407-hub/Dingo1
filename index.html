@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CNS Final Exam Planner</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f6;--surf:#fff;--ink:#14213d;--mute:#5d6a85;--line:#d8deea;--blue:#2457d6;--blueb:#e3ebfd;--or:#d9680b;--orb:#fdebd9;--gr:#1d8a4f;--grb:#dcf3e5;--ph2:#6b3fa0;--ph2b:#ece3f7;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1626;--surf:#18223a;--ink:#e9eefb;--mute:#97a3c0;--line:#2a3657;--blue:#7da3ff;--blueb:#1f2f58;--or:#ffa24f;--orb:#3d2b18;--gr:#5bd68d;--grb:#173a29;--ph2:#bf9bf0;--ph2b:#2f2347}}
+:root[data-theme="dark"]{--bg:#0f1626;--surf:#18223a;--ink:#e9eefb;--mute:#97a3c0;--line:#2a3657;--blue:#7da3ff;--blueb:#1f2f58;--or:#ffa24f;--orb:#3d2b18;--gr:#5bd68d;--grb:#173a29;--ph2:#bf9bf0;--ph2b:#2f2347}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Inter Tight",system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+h1{font:800 clamp(28px,7vw,40px)/1.05 "Bricolage Grotesque",sans-serif;margin:0 0 6px;letter-spacing:-.02em}
+.sub{color:var(--mute);margin:0 0 18px}
+.top{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.box{background:var(--surf);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.big{font:800 30px/1 "Bricolage Grotesque",sans-serif}
+.lbl{color:var(--mute);font-size:13px;margin-top:4px}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;width:0;background:var(--blue);transition:width .3s}
+.days{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;margin:0 -16px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+.days button{flex:0 0 auto;min-width:54px;border:1px solid var(--line);background:var(--surf);color:var(--ink);border-radius:12px;padding:6px 8px;font:inherit;cursor:pointer;text-align:center;line-height:1.2}
+.days button b{display:block;font:800 17px "Bricolage Grotesque",sans-serif}
+.days button small{color:var(--mute);font-size:12px}
+.days button.ph2 small{color:var(--ph2)}
+.days button[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.days button[aria-selected=true] small{color:var(--bg)}
+.days button.done{border-color:var(--gr)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+h2{font:800 22px/1.15 "Bricolage Grotesque",sans-serif;margin:8px 0 4px}
+.tag{display:inline-block;font-size:13px;font-weight:600;border-radius:99px;padding:2px 10px;margin-left:6px;vertical-align:middle}
+.sec{background:var(--surf);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:14px;padding:12px 14px;margin:12px 0}
+.sec h3{margin:0 0 6px;font-size:15px;font-weight:600;color:var(--c);display:flex;justify-content:space-between;gap:8px}
+.sec h3 span{color:var(--mute);font-weight:500;white-space:nowrap}
+.sec label{display:flex;gap:10px;align-items:flex-start;padding:7px 0;cursor:pointer;border-top:1px solid var(--line)}
+.sec label:first-of-type{border-top:0}
+.sec input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--c);flex:0 0 auto}
+.sec input:checked+span{color:var(--mute);text-decoration:line-through}
+.hard{font-size:12px;font-weight:600;color:var(--or);margin-left:4px}
+.note{background:var(--surf);border:1px dashed var(--line);border-radius:12px;padding:10px 14px;color:var(--mute);font-size:14px;margin-top:12px}
+.rule{border-left-color:var(--ph2)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;color:var(--mute);margin:6px 0 12px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;background:var(--c)}
+.foot{display:flex;gap:8px;margin-top:18px}
+.foot button{flex:1;border:1px solid var(--line);background:var(--surf);color:var(--ink);border-radius:12px;padding:10px;font:inherit;cursor:pointer}
+</style>
+</head>
+<body>
+<main>
+<h1>CNS Final Exam Planner</h1>
+<p class="sub">Revised plan · 13–23 November 2026 · 57 phases · exam on 24 November</p>
+<div class="top">
+  <div class="box"><div class="big" id="cd">–</div><div class="lbl" id="cdl">days to the exam</div></div>
+  <div class="box"><div class="big" id="pct">0%</div><div class="lbl">of tasks ticked off</div><div class="bar"><i id="fill"></i></div></div>
+</div>
+<div class="legend">
+  <span style="--c:var(--blue)"><i></i>New study / revision</span>
+  <span style="--c:var(--or)"><i></i>Old revision</span>
+  <span style="--c:var(--gr)"><i></i>Study only</span>
+  <span style="--c:var(--ph2)"><i></i>Comprehensive revision</span>
+</div>
+<div class="days" id="days" role="tablist" aria-label="Days"></div>
+<section id="view" aria-live="polite"></section>
+<div class="foot"><button id="theme">Switch light / dark</button><button id="reset">Clear all ticks</button></div>
+</main>
+<script>
+var B="var(--blue)",O="var(--or)",G="var(--gr)",P="var(--ph2)";
+var D=[
+{d:"Fri 13 Nov",p:1,s:[
+["New · Study","4–4.5 h",B,["Cerebellum Anatomy!","Blood supply of the brain!"]],
+["Old · Revise","1–1.5 h",O,["Cerebrum I","Cerebrum II"]],
+["Study only","1–1.5 h",G,["Brain abscess & Poliomyelitis"]],["Daily consolidation","1–1.5 h",P,["Active recall + short question set"]]],
+n:"Keep Cerebrum I and II ahead of Basal Ganglia. Cerebellum Anatomy and Physiology are now separate lectures."},
+{d:"Sat 14 Nov",p:1,s:[
+["New · Study","5–5.5 h",B,["Cerebellum Physiology!","Meninges & ventricular system I + II","Peripheral nervous system (PNS)"]],
+["Old · Revise","45–60 min",O,["Basal Ganglia"]],
+["Study only","1–1.5 h",G,["CNS development"]],["Daily consolidation","1–1.5 h",P,["Active recall + questions"]]],
+n:"Basal Ganglia comes after Cerebrum I and II, as required."},
+{d:"Sun 15 Nov",p:1,s:[
+["New · Study","3.5–4 h",B,["Visual pathway","Functions of the eye I + II"]],
+["New · Revision","1.5–2 h",B,["Cerebellum Anatomy","Blood supply of the brain"]],
+["Old · Revise","45–60 min",O,["Sensory & Motor Areas of Cortex I (Parts 1 + 2)"]],
+["Study only","1–1.5 h",G,["Protozoa causing CNS diseases II"]],["Daily consolidation","1–1.5 h",P,["Active recall + questions"]]]},
+{d:"Mon 16 Nov",p:1,s:[
+["New · Study","3–3.5 h",B,["Optical system of the eye","Visual process"]],
+["New · Revision","2–2.5 h",B,["Cerebellum Physiology","Meninges & ventricular system I + II","PNS"]],
+["Old · Revise","45–60 min",O,["Sensory & Motor Areas of Cortex II (Parts 3 + 4)"]],
+["Study only","1–1.5 h",G,["Helminths causing CNS diseases I"]],["Daily consolidation","1 h",P,["Active recall + questions"]]],
+n:"Keep the four cortical-area parts in sequence. Revisions fall on consecutive days so the material stays connected."},
+{d:"Tue 17 Nov",p:1,s:[
+["New · Study","3–3.5 h",B,["Light-dark adaptation & colour vision","Auditory & vestibular pathways"]],
+["New · Revision","1.5–2 h",B,["Visual pathway","Functions of the eye I + II"]],
+["Old · Revise","45–60 min",O,["Functions of vestibular apparatus"]],
+["Study only","1–1.5 h",G,["Helminths causing CNS diseases II"]],["Daily consolidation","1.5–2 h",P,["Active recall / MCQs","Consolidate the eye physiology sequence"]]]},
+{d:"Wed 18 Nov",p:1,s:[
+["New · Study","5–5.5 h",B,["Hearing mechanism!","Neurotransmitters (Biochemistry)","Opioid analgesics!"]],
+["New · Revision","1.5–2 h",B,["Optical system of the eye","Visual process"]],
+["Old · Revise","45–60 min",O,["Thalamus, Limbic System & Hypothalamus"]],
+["Study only","1–1.5 h",G,["Parasitic infections of the eye"]],["Daily consolidation","45–60 min",P,["Questions"]]],
+n:"A heavier day. Give Opioid analgesics and Hearing mechanism enough attention."},
+{d:"Thu 19 Nov",p:1,s:[
+["New · Study","5–5.5 h",B,["CNS Tumors (Part I + II together)!","Parkinsonism","Gustatory & olfactory pathways"]],
+["New · Revision","1.5 h",B,["Light-dark adaptation & colour vision","Auditory & vestibular pathways"]],
+["Old · Revise","45–60 min",O,["ARAS, EEG & Sleep"]],
+["Study only","1–1.5 h",G,["Infections of the eyes & ear"]],["Daily consolidation","45–60 min",P,["Active recall + questions"]]]},
+{d:"Fri 20 Nov",p:1,s:[
+["New · Study","3.5–4 h",B,["Sedative & hypnotic drugs","Pharmacotherapy of epilepsy!"]],
+["New · Revision","2.5–3 h",B,["Hearing mechanism","Neurotransmitters","Opioid analgesics"]],
+["Old · Revise","45–60 min",O,["Chemical senses"]],
+["Study only","1–1.5 h",G,["Eye & Ear Histology"]],["Daily consolidation","1–1.5 h",P,["Mixed questions and recall"]]],
+n:"Eye histology follows eye physiology. Ear histology follows hearing mechanism and the auditory/vestibular material."},
+{d:"Sat 21 Nov",p:1,s:[
+["New · Revision","4–4.5 h",B,["CNS Tumors (Parts I + II)","Parkinsonism","Gustatory & olfactory pathways","Sedative & hypnotic drugs","Pharmacotherapy of epilepsy"]],
+["Old · Revise","1.5–2 h",O,["Tetanus, Botulism & Prions","Brainstem"]],
+["Consolidation","2–2.5 h",P,["Mixed questions / previous questions","Recall difficult material from Days 1–8","Make a short weak-topics list for comprehensive revision"]]],n:"Use any remaining time to close small gaps. This is not a first-time learning day. Aim to finish by early evening: the half-day review follows."},
+{d:"Sat 21 Nov",p:2,e:", evening",t:"Half day: Anatomy",s:[
+["Evening session","about 3 h",P,["1.5 h · Anatomy: head, neck, orbit and blood supply","1.5 h · Anatomy: meninges, spinal cord, PNS and brainstem"]]],
+n:"Starts after Day 9. Keep it lighter if you're tired, and take a short break between the two blocks."},
+{d:"Sun 22 Nov",p:2,t:"Anatomy + Physiology + Senses",s:[
+["Morning","8:00–12:30",P,["8:00–9:30 · Cerebrum, cerebellum anatomy and basal ganglia","9:30–11:00 · Physiology: sensory and motor cortex, reflexes, pain and cerebellum physiology","11:00–12:30 · Eye physiology and visual pathways"]],
+["Afternoon","1:30–6:00",P,["1:30–3:00 · Hearing, vestibular and chemical senses","3:00–4:30 · Histology and Biochemistry","4:30–6:00 · Physiology MCQs and written questions"]]],
+n:"Break 12:30–1:30."},
+{d:"Mon 23 Nov",p:2,t:"Final Examination Preparation",s:[
+["Morning","8:00–1:00",P,["8:00–10:00 · Pharmacology: all six lectures","10:00–11:30 · Pathology and Microbiology","11:30–1:00 · Parasitology"]],
+["Afternoon","2:00–6:00",P,["2:00–3:30 · Difficult diagrams (anatomy, eye, ear) and high-yield physiology","3:30–5:00 · Mixed mock exam / previous exams","5:00–6:00 · Correct mistakes and review weak points"]],
+["Evening","Light only",G,["Light recall and adequate sleep"]]],
+n:"Break 1:00–2:00. Don't start entirely new material tonight: recall lightly, fix mistakes, sleep."}
+];
+var KEY="cns-ticks-v1",ticks={},cur=0;
+try{ticks=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ticks))}catch(e){}}
+function id(i,j,k){return i+"-"+j+"-"+k}
+function dayCount(i){var t=0,c=0;D[i].s.forEach(function(s,j){s[3].forEach(function(_,k){t++;if(ticks[id(i,j,k)])c++})});return[c,t]}
+function stats(){var c=0,t=0;D.forEach(function(_,i){var r=dayCount(i);c+=r[0];t+=r[1]});
+ var p=Math.round(100*c/t);document.getElementById("pct").textContent=p+"%";document.getElementById("fill").style.width=p+"%";}
+function tabs(){var h="";D.forEach(function(x,i){var r=dayCount(i),parts=x.d.split(" ");
+ h+='<button role="tab" aria-selected="'+(i===cur)+'" class="'+(x.p===2?"ph2 ":"")+(r[0]===r[1]?"done":"")+'" data-i="'+i+'"><small>'+parts[0]+'</small><b>'+parts[1]+'</b><small>'+(x.p===2?(x.e?"Evening":"Review"):"Day "+(i+1))+'</small></button>'});
+ document.getElementById("days").innerHTML=h}
+function view(){var x=D[cur],r=dayCount(cur);
+ var h='<h2>Day '+(cur+1)+' · '+x.d.replace(/^\w+ /,"").replace("Nov","November")+(x.e||"")+'<span class="tag" style="background:'+(x.p===2?"var(--ph2b);color:var(--ph2)":"var(--blueb);color:var(--blue)")+'">'+(x.p===2?"Phase 2 · "+x.t:"Phase 1")+'</span></h2><div class="lbl">'+r[0]+' of '+r[1]+' done</div>';
+ x.s.forEach(function(s,j){h+='<div class="sec" style="--c:'+s[2]+'"><h3>'+s[0]+'<span>'+s[1]+'</span></h3>';
+  s[3].forEach(function(it,k){var hard=/!$/.test(it),n=it.replace(/!$/,""),i=id(cur,j,k);
+   h+='<label><input type="checkbox" data-k="'+i+'"'+(ticks[i]?" checked":"")+'><span>'+n+(hard?'<em class="hard"> hard</em>':"")+'</span></label>'});
+  h+='</div>'});
+ if(x.n)h+='<div class="note">'+x.n+'</div>';
+ document.getElementById("view").innerHTML=h}
+function render(){tabs();view();stats()}
+document.getElementById("days").addEventListener("click",function(e){var b=e.target.closest("button");if(b){cur=+b.dataset.i;render();b.scrollIntoView({inline:"center",block:"nearest"})}});
+document.getElementById("view").addEventListener("change",function(e){var k=e.target.dataset.k;if(k){if(e.target.checked)ticks[k]=1;else delete ticks[k];save();tabs();stats();var r=dayCount(cur);document.querySelector("#view .lbl").textContent=r[0]+" of "+r[1]+" done"}});
+document.getElementById("reset").onclick=function(){ticks={};save();render()};
+document.getElementById("theme").onclick=function(){var r=document.documentElement,d=getComputedStyle(r).getPropertyValue("--bg").trim()==="#0f1626";r.setAttribute("data-theme",d?"light":"dark")};
+(function(){var now=new Date(),ex=new Date(2026,10,24),t=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+ var n=Math.round((ex-t)/864e5);
+ if(n>0){document.getElementById("cd").textContent=n;document.getElementById("cdl").textContent=n===1?"day to the exam":"days to the exam"}
+ else if(n===0){document.getElementById("cd").textContent="Today";document.getElementById("cdl").textContent="exam day. Good luck!"}
+ else{document.getElementById("cd").textContent="Done";document.getElementById("cdl").textContent="the exam has passed"}
+ var m=t.getMonth()===10?t.getDate()-13:-1;if(m>=9)m++;if(m>=0&&m<D.length)cur=m;})();
+render();
+</script>
+</body>
+</html>
